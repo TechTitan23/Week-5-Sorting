@@ -1,0 +1,346 @@
+EXERCISE :
+
+1.Write a function to implement the Quick Sort algorithm. Your function should take an unsorted list as input and return the sorted list. You can choose any programming language if you prefer
+Pseudocode :
+function quick_sort(arr):
+    if length(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]  # Choose the first element as the pivot
+        less = [x for x in arr[1:] if x <= pivot]
+        greater = [x for x in arr[1:] if x > pivot]
+        return quick_sort(less) + [pivot] + quick_sort(greater)
+
+2.Create a function to perform an in-place merge of two sorted arrays. Given two sorted arrays, write a function that merges them into a single sorted array without using extra memory.
+Pseudocode :
+function merge_sorted_arrays_inplace(arr1, arr2):
+    // Get the lengths of both arrays
+    len1 = length(arr1)
+    len2 = length(arr2)
+    
+    // Calculate the total length of the merged array
+    total_len = len1 + len2
+    
+    // Start from the end of the merged array
+    index1 = len1 - 1
+    index2 = len2 - 1
+    merged_index = total_len - 1
+    
+    // Continue merging until we've processed all elements from arr2
+    while index2 >= 0:
+        // Compare the elements at the current positions in both arrays
+        if arr1[index1] >= arr2[index2]:
+            // Move the larger element to the end of the merged array
+            arr1[merged_index] = arr1[index1]
+            index1 -= 1
+        else:
+            arr1[merged_index] = arr2[index2]
+            index2 -= 1
+        merged_index -= 1
+    
+    // If there are remaining elements in arr2, copy them to the beginning of arr1
+    while index2 >= 0:
+        arr1[merged_index] = arr2[index2]
+        index2 -= 1
+        merged_index -= 1
+
+3.Write a function to build a Max Heap from an unsorted array. Your function should take an array as input and convert it into a Max Heap. You can use an array-based representation for the heap.
+Pseudocode :
+function build_max_heap(arr):
+    // Start with the last non-leaf node (parent of the last element)
+    last_non_leaf_index = floor(length(arr) / 2) - 1
+    
+    // Perform heapify operation for each non-leaf node, working in reverse order
+    for i from last_non_leaf_index down to 0:
+        heapify(arr, i)
+
+function heapify(arr, index):
+    // Get the indices of the left and right children
+    left_child_index = 2 * index + 1
+    right_child_index = 2 * index + 2
+    
+    // Assume the current node has the maximum value
+    max_index = index
+    
+    // Compare the current node with its left child
+    if left_child_index < length(arr) and arr[left_child_index] > arr[max_index]:
+        max_index = left_child_index
+    
+    // Compare the current node with its right child
+    if right_child_index < length(arr) and arr[right_child_index] > arr[max_index]:
+        max_index = right_child_index
+    
+    // If the current node is not the maximum, swap it with the maximum child
+    if max_index != index:
+        swap(arr, index, max_index)
+        
+        // Recursively heapify the affected subtree
+        heapify(arr, max_index)
+
+function swap(arr, i, j):
+    // Swap elements at indices i and j in the array
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+
+4.Write a function to find the median (middle element) of an unsorted list using the Quick Sort algorithm. 
+Pseudocode :
+function find_median(arr):
+    if length(arr) % 2 == 1:
+        # If the list has an odd number of elements, the median is the middle element
+        middle_index = length(arr) // 2
+        return quick_select(arr, 0, length(arr) - 1, middle_index)
+    else:
+        # If the list has an even number of elements, the median is the average of the two middle elements
+        middle_index1 = (length(arr) - 1) // 2
+        middle_index2 = length(arr) // 2
+        median1 = quick_select(arr, 0, length(arr) - 1, middle_index1)
+        median2 = quick_select(arr, 0, length(arr) - 1, middle_index2)
+        return (median1 + median2) / 2
+
+function quick_select(arr, low, high, k):
+    if low == high:
+        return arr[low]
+    pivot_index = partition(arr, low, high)
+    if k == pivot_index:
+        return arr[k]
+    else if k < pivot_index:
+        return quick_select(arr, low, pivot_index - 1, k)
+    else:
+        return quick_select(arr, pivot_index + 1, high, k)
+
+function partition(arr, low, high):
+    pivot = arr[low]
+    left = low + 1
+    right = high
+    done = False
+    
+    while not done:
+        while left <= right and arr[left] <= pivot:
+            left = left + 1
+        while arr[right] >= pivot and right >= left:
+            right = right - 1
+        if right < left:
+            done = True
+        else:
+            swap(arr, left, right)
+    
+    swap(arr, low, right)
+    return right
+
+function swap(arr, i, j):
+    # Swap elements at indices i and j in the array
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+5.You are given an array of integers representing the percentage of students in a class. Your task is to sort this array in ascending order based on the students' percentage. Choose the most appropriate sorting technique for this task and write a function to perform the sorting. Explain why you chose this sorting technique.
+          Pseudocode :
+function counting_sort(arr):
+    # Find the maximum value in the input array
+    max_value = max(arr)
+    
+    # Create a counting array of size (max_value + 1) initialized with zeros
+    count = [0] * (max_value + 1)
+    
+    # Count the occurrences of each element in the input array
+    for num in arr:
+        count[num] += 1
+    
+    # Reconstruct the sorted array based on the counting array
+    sorted_arr = []
+    for i from 0 to max_value:
+        while count[i] > 0:
+            sorted_arr.append(i)
+            count[i] -= 1
+    
+    return sorted_arr
+
+6.What data structure is used to implement a heap in the Heap Sort algorithm?
+A) Linked List
+B) Array
+C) Binary Tree
+D) Hash Table
+Answer : B) Array
+Explanation:The Heap Sort algorithm, a binary heap is used as the data structure to implement the heap. A binary heap is typically implemented using an array, where the elements are arranged in a way that satisfies the heap property (either a max-heap or a min-heap). This array-based representation allows for efficient operations like insertion, deletion, and maintaining the heap property, making it a crucial part of the Heap Sort algorithm.
+
+
+7.Merge Sort is an example of a _____ sorting algorithm.
+A) Divide and Conquer
+B) Quick Sort
+C) Bubble Sort
+D) Selection Sort
+Answer :A) Divide and Conquer
+Explanation:Merge Sort is an example of a divide and conquer sorting algorithm. It divides the input array into two halves, recursively sorts these halves, and then merges them to produce a sorted output. This divide-and-conquer approach is a characteristic feature of Merge Sort.
+
+8.In Quick Sort, the element used for partitioning is called:
+A) Pivot
+B) Index
+C) Element
+D) Sorter
+Answer :A) Pivot
+Explanation:In Quick Sort, the element used for partitioning is called the "pivot." The pivot element is chosen to divide the input array into two subarrays, one containing elements less than or equal to the pivot, and the other containing elements greater than the pivot. The choice of the pivot plays a crucial role in the efficiency of the Quick Sort algorithm.
+
+9.Which of the following is a stable sorting algorithm?
+A) Quick Sort
+B) Merge Sort
+C) Heap Sort
+D) None of the above
+Answer:B) Merge Sort
+Explanation: Merge Sort is a stable sorting algorithm. Stability in sorting algorithms means that when two elements have equal keys, their relative order in the sorted output is the same as their relative order in the input. Merge Sort maintains the relative order of equal elements during the merging phase, which makes it a stable sorting algorithm.
+
+11. Implement a program to modify the Bubble Sort i.e to sort an array of integers in descending order instead of ascending order.
+ Pseudocode :
+function bubble_sort_descending(arr):
+    n = length(arr)
+    
+    for i from 0 to n - 1:
+        for j from 0 to n - i - 1:
+            if arr[j] < arr[j + 1]:  # Change < to >
+                swap(arr, j, j + 1)
+
+function swap(arr, i, j):
+    # Swap elements at indices i and j in the array
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+12.Extend the Selection Sort implementation to find both the minimum and maximum elements in an array and move them to the beginning and end of the array, respectively.
+ Pseudocode :
+function selection_sort_min_max(arr):
+    n = length(arr)
+    
+    for i from 0 to n/2:
+        min_index = i
+        max_index = i
+        
+        for j from i to n - i:
+            if arr[j] < arr[min_index]:
+                min_index = j
+            if arr[j] > arr[max_index]:
+                max_index = j
+        
+        # Swap the minimum element with the element at position i
+        swap(arr, i, min_index)
+        
+        # Adjust the max_index if the maximum element was just moved to position i
+        if max_index == i:
+            max_index = min_index
+        
+        # Swap the maximum element with the element at the end of the array
+        swap(arr, n - i - 1, max_index)
+
+function swap(arr, i, j):
+    # Swap elements at indices i and j in the array
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+13. Write a function to calculate the time taken (in milliseconds) for the Insertion Sort to sort a large array .
+ Pseudocode :
+import time
+
+function insertion_sort(arr):
+    n = length(arr)
+    
+    for i from 1 to n - 1:
+        key = arr[i]
+        j = i - 1
+        
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j = j - 1
+        
+        arr[j + 1] = key
+
+function measure_insertion_sort_time(arr):
+    start_time = current_time_in_milliseconds()
+    insertion_sort(arr)
+    end_time = current_time_in_milliseconds()
+    
+    return end_time - start_time
+
+function current_time_in_milliseconds():
+    # Implement a function to get the current time in milliseconds
+    # This will depend on your programming language
+
+14.Modify Selection Sort to find both the kth smallest and largest elements in an array.
+ Pseudocode :
+function selection_sort_k_smallest_largest(arr, k):
+    n = length(arr)
+    
+    if k <= 0 or k > n:
+        return "Invalid k value"
+    
+    k_smallest = [0] * k
+    k_largest = [0] * k
+    
+    for i from 0 to k - 1:
+        k_smallest[i] = arr[i]
+        k_largest[i] = arr[i]
+    
+    for i from k to n - 1:
+        min_index = 0
+        max_index = 0
+        
+        for j from 1 to k - 1:
+            if k_smallest[j] < k_smallest[min_index]:
+                min_index = j
+            if k_largest[j] > k_largest[max_index]:
+                max_index = j
+        
+        if arr[i] < k_smallest[min_index]:
+            k_smallest[min_index] = arr[i]
+        if arr[i] > k_largest[max_index]:
+            k_largest[max_index] = arr[i]
+    
+    return k_smallest, k_largest
+
+15. What is the worst-case time complexity of Bubble Sort?
+a. O(n) 
+b. O(n log n) 
+c. O(n^2) 
+d. O(log n)
+Answer: c. O(n^2)
+Explanation:The worst-case time complexity of Bubble Sort is O(n^2), where n is the number of elements in the array. In the worst-case scenario, when the input array is in reverse order, Bubble Sort requires a large number of comparisons and swaps to sort the elements, resulting in a quadratic time complexity.
+
+16.In Insertion Sort, what is the key advantage that allows it to perform well on small datasets and partially sorted data?
+a. It uses a divide-and-conquer approach. 
+b. It has a linear time complexity of O(n).
+c. It minimizes the number of comparisons. 
+d. It adapts to the existing order of elements.
+Answer: d. It adapts to the existing order of elements.
+Explanation:The key advantage of Insertion Sort is that it adapts well to the existing order of elements in the input array. It performs efficiently on small datasets and partially sorted data because it makes a minimal number of comparisons and swaps when elements are already in the correct order or nearly in the correct order. This adaptability is what makes it suitable for such scenarios.
+
+17.Consider a situation where swap operation is very costly. Which of the following sorting algorithms should be preferred so that the number of swap operations are minimized in general?
+Heap sort
+Selection sort
+Insertion Sort
+Merge sort
+Answer : b.Selection sort
+Explanation:Selection Sort is a sorting algorithm that minimizes the number of swap operations, as it repeatedly selects the smallest (or largest) element from the unsorted portion of the array and places it in its correct position without the need for many swaps. It makes only one swap for each pass through the array, making it a better choice than algorithms like Bubble Sort or Quick Sort, which involve more frequent swaps.
+
+18.Which sorting algorithm will take least time when all elements of input array are identical? Consider typical implementations of sorting algorithms.
+a.Heap sort
+b.Selection sort
+c.Insertion Sort
+d.Merge sort
+Answer :a.Heap sort
+Explanation:Heap Sort has consistent time complexity regardless of the initial order of the elements. When all elements in the input array are identical, Heap Sort will perform just as efficiently as in any other scenario. Its time complexity remains O(n log n) in all cases, making it a good choice for this scenario. On the other hand, algorithms like Quick Sort and Merge Sort might not perform as well in this specific case.
+
+19.Consider the following array {23, 32, 45, 69, 72, 73, 89, 97}. Which algorithm out of the given options uses the least number of comparisons ( among the elements ) to sort the above array in ascending order?
+a.Selection sort
+b.Mergesort
+c.Insertion sort
+d.Quicksort with the last element as a pivot
+Answer :a.Selection sort
+Explanation:In the provided array, which is already partially sorted, Selection Sort typically performs fewer comparisons than other sorting algorithms like Merge Sort, Insertion Sort, or Quick Sort. This is because Selection Sort always selects the minimum or maximum element from the unsorted portion of the array and places it in its correct position, resulting in a consistent number of comparisons regardless of the initial order of the elements.In contrast, Merge Sort, Quick Sort, and Insertion Sort would typically require more comparisons in this scenario, making Selection Sort the best choice for minimizing the number of comparisons for this specific array.
+
+
+20. Which of the below-sorting algorithms in its typical implementation gives the best performance when applied on an array that is sorted or almost sorted (maximum 1 or 2 elements are misplaced)?
+a.Insertion Sort
+b.Merge Sort
+c.Quick Sort
+d.Heap Sort
+Answer :a.Insertion Sort
+Explanation:Insertion Sort typically performs the best when applied to an array that is already sorted or almost sorted, with a small number of elements misplaced. This is because Insertion Sort makes minimal comparisons and swaps when the majority of the elements are already in their correct positions. It is a simple and efficient choice for nearly sorted data or small numbers of elements out of place.
