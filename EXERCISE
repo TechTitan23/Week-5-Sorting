@@ -1,0 +1,82 @@
+EXERCISE :
+
+1.Write a function to implement the Quick Sort algorithm. Your function should take an unsorted list as input and return the sorted list. You can choose any programming language if you prefer
+
+2.Create a function to perform an in-place merge of two sorted arrays. Given two sorted arrays, write a function that merges them into a single sorted array without using extra memory.
+
+3.Write a function to build a Max Heap from an unsorted array. Your function should take an array as input and convert it into a Max Heap. You can use an array-based representation for the heap.
+
+4.Write a function to find the median (middle element) of an unsorted list using the Quick Sort algorithm. 
+
+5.You are given an array of integers representing the percentage of students in a class. Your task is to sort this array in ascending order based on the students' percentage. Choose the most appropriate sorting technique for this task and write a function to perform the sorting. Explain why you chose this sorting technique.
+
+6.What data structure is used to implement a heap in the Heap Sort algorithm?
+A) Linked List
+B) Array
+C) Binary Tree
+D) Hash Table
+
+7.Merge Sort is an example of a _____ sorting algorithm.
+
+A) Divide and Conquer
+B) Quick Sort
+C) Bubble Sort
+D) Selection Sort
+
+8.In Quick Sort, the element used for partitioning is called:
+
+A) Pivot
+B) Index
+C) Element
+D) Sorter
+
+9.Which of the following is a stable sorting algorithm?
+
+A) Quick Sort
+B) Merge Sort
+C) Heap Sort
+D) None of the above
+
+11. Implement a program to modify the Bubble Sort i.e to sort an array of integers in descending order instead of ascending order.
+
+12.Extend the Selection Sort implementation to find both the minimum and maximum elements in an array and move them to the beginning and end of the array, respectively.
+
+13. Write a function to calculate the time taken (in milliseconds) for the Insertion Sort to sort a large array .
+
+14.Modify Selection Sort to find both the kth smallest and largest elements in an array.
+
+15. What is the worst-case time complexity of Bubble Sort?
+a. O(n) 
+b. O(n log n) 
+c. O(n^2) 
+d. O(log n)
+
+16.In Insertion Sort, what is the key advantage that allows it to perform well on small datasets and partially sorted data?
+a. It uses a divide-and-conquer approach. 
+b. It has a linear time complexity of O(n).
+c. It minimizes the number of comparisons. 
+d. It adapts to the existing order of elements.
+
+17.Consider a situation where swap operation is very costly. Which of the following sorting algorithms should be preferred so that the number of swap operations are minimized in general?
+Heap sort
+Selection sort
+Insertion Sort
+Merge sort
+
+18.Which sorting algorithm will take least time when all elements of input array are identical? Consider typical implementations of sorting algorithms.
+a.Heap sort
+b.Selection sort
+c.Insertion Sort
+d.Merge sort
+
+19.Consider the following array {23, 32, 45, 69, 72, 73, 89, 97}. Which algorithm out of the given options uses the least number of comparisons ( among the elements ) to sort the above array in ascending order?
+a.Selection sort
+b.Mergesort
+c.Insertion sort
+d.Quicksort with the last element as a pivot
+
+20. Which of the below-sorting algorithms in its typical implementation gives the best performance when applied on an array that is sorted or almost sorted (maximum 1 or 2 elements are misplaced)?
+a.Insertion Sort
+b.Merge Sort
+c.Quick Sort
+d.Heap Sort
